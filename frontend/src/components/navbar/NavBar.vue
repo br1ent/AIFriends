@@ -19,7 +19,14 @@
           </div>
         </div>
         <div class="navbar-end">
-          <router-link :to="{name: 'user-account-login-index'}" active-class="btn-active" class="btn btn-ghost text-lg">登录</router-link>
+          <router-link :to="{name: 'create-index'}" v-if="user.isLogin()" active-class="btn-active" class="btn btn-gosh text-base mr-6">
+            <CreateIcon></CreateIcon>
+            创作
+          </router-link>
+          <router-link v-if="!user.isLogin()" :to="{name: 'user-account-login-index'}" active-class="btn-active" class="btn btn-ghost text-lg">
+            登录
+          </router-link>
+          <UserMenu v-else />
         </div>
       </nav>
       <slot></slot>
@@ -38,13 +45,17 @@
           <li>
             <router-link :to="{name: 'friend-index'}" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-4" data-tip="好友">
               <FriendIcon></FriendIcon>
-              <span class="is-drawer-close:hidden text-base pl-2 whitespace-nowrap">好友</span>
+              <span class="is-drawer-close:hidden text-base pl-2 whitespace-nowrap">
+                好友
+              </span>
             </router-link>
           </li>
           <li>
             <router-link :to="{name: 'create-index'}" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-4" data-tip="创作">
               <CreateIcon></CreateIcon>
-              <span class="is-drawer-close:hidden text-base pl-2 whitespace-nowrap">创作</span>
+              <span class="is-drawer-close:hidden text-base pl-2 whitespace-nowrap">
+                创作
+              </span>
             </router-link>
           </li>
         </ul>
@@ -54,12 +65,15 @@
 </template>
 
 <script setup>
-
 import MenuIcon from "@/components/navbar/icons/MenuIcon.vue";
 import HomepageIcon from "@/components/navbar/icons/HomepageIcon.vue";
 import FriendIcon from "@/components/navbar/icons/FriendIcon.vue";
 import CreateIcon from "@/components/navbar/icons/CreateIcon.vue";
 import SearchIcon from "@/components/navbar/icons/SearchIcon.vue";
+import {useUserStore} from "@/stores/user.js";
+import UserMenu from "@/components/navbar/UserMenu.vue";
+
+const user = useUserStore()
 </script>
 
 <style scoped></style>
