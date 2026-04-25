@@ -7,6 +7,7 @@ import LoginIndex from "@/views/user/account/LoginIndex.vue";
 import RegisterIndex from "@/views/user/account/RegisterIndex.vue";
 import SpaceIndex from "@/views/user/space/SpaceIndex.vue";
 import ProfileIndex from "@/views/user/profile/ProfileIndex.vue";
+import {useUserStore} from "@/stores/user.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,55 +17,55 @@ const router = createRouter({
       name: "homepage-index",
       component: HomepageIndex,
       meta: {
-        title: "主页"
+        requireAuth: false
       }
     },
     {
-      path: "/friend",
+      path: "/friend/",
       name: "friend-index",
       component: FriendIndex,
       meta: {
-        title: "我的好友"
+        requireAuth: true
       }
     },
     {
-      path: "/create",
+      path: "/create/",
       name: "create-index",
       component: CreateIndex,
       meta: {
-        title: "开始创作"
+        requireAuth: true
       }
     },
     {
-      path: "/404",
+      path: "/404/",
       name: "404",
       component: NotFoundIndex,
       meta: {
-        title: "页面丢失"
+        requireAuth: false
       }
     },
     {
-      path: "/user/account/login",
+      path: "/user/account/login/",
       name: "user-account-login-index",
       component: LoginIndex,
       meta: {
-        title: "登录"
+        requireAuth: false
       }
     },
     {
-      path: "/user/account/register",
+      path: "/user/account/register/",
       name: "user-account-register-index",
       component: RegisterIndex,
       meta: {
-        title: "注册"
+        requireAuth: false
       }
     },
     {
-      path: "/user/space/:user_id",
+      path: "/user/space/:user_id/",
       name: "user-space-index",
       component: SpaceIndex,
       meta: {
-        title: "个人空间"
+        requireAuth: true
       }
     },
     {
@@ -72,24 +73,29 @@ const router = createRouter({
       name: "user-profile-index",
       component: ProfileIndex,
       meta: {
-        title: "个人资料"
+        requireAuth: true
       }
     },
     {
-      path: "/:pathMatch(.*)*",
+      path: "/:pathMatch(.*)*/",
       component: NotFoundIndex,
-      name: '404'
+      name: '404',
+      meta: {
+        requireAuth: false
+      }
     }
   ],
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
-    document.title = to.meta.title;
-  } else {
-    document.title = "默认标题";
+router.beforeEach((to, from) => {
+  const user = useUserStore();
+  if (to.meta.requireAuth && user.hasPullUserInfo && !user.isLogin()) {
+    return {
+      name: 'user-account-login-index'
+    }
   }
-  next();
-});
+
+  return true;
+})
 
 export default router

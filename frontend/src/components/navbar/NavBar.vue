@@ -23,10 +23,10 @@
             <CreateIcon></CreateIcon>
             创作
           </router-link>
-          <router-link v-if="!user.isLogin()" :to="{name: 'user-account-login-index'}" active-class="btn-active" class="btn btn-ghost text-lg">
+          <router-link v-if="user.hasPullUserInfo && !user.isLogin()" :to="{name: 'user-account-login-index'}" active-class="btn-active" class="btn btn-ghost text-lg">
             登录
           </router-link>
-          <UserMenu v-else />
+          <UserMenu v-else-if="user.isLogin()" />
         </div>
       </nav>
       <slot></slot>
