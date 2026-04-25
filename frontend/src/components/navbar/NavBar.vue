@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="navbar-end">
-          <button class="btn btn-ghost text-lg">登录</button>
+          <router-link :to="{name: 'user-account-login-index'}" active-class="btn-active" class="btn btn-ghost text-lg">登录</router-link>
         </div>
       </nav>
       <slot></slot>
@@ -30,22 +30,22 @@
       <div class="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-16 is-drawer-open:w-50">
         <ul class="menu w-full grow">
           <li>
-            <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-4" data-tip="主页">
+            <router-link :to="{name: 'homepage-index'}" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-4" data-tip="主页">
               <HomepageIcon></HomepageIcon>
               <span class="is-drawer-close:hidden text-base pl-2 whitespace-nowrap">主页</span>
-            </button>
+            </router-link>
           </li>
           <li>
-            <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-4" data-tip="好友">
+            <router-link :to="{name: 'friend-index'}" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-4" data-tip="好友">
               <FriendIcon></FriendIcon>
               <span class="is-drawer-close:hidden text-base pl-2 whitespace-nowrap">好友</span>
-            </button>
+            </router-link>
           </li>
           <li>
-            <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-4" data-tip="创作">
+            <router-link :to="{name: 'create-index'}" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-4" data-tip="创作">
               <CreateIcon></CreateIcon>
               <span class="is-drawer-close:hidden text-base pl-2 whitespace-nowrap">创作</span>
-            </button>
+            </router-link>
           </li>
         </ul>
       </div>
