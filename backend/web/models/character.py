@@ -26,4 +26,4 @@ class Character(models.Model):
     update_time = models.DateTimeField(default=now)
 
     def __str__(self):
-        return f"{self.author.user.user_name} - {self.name} - {localtime(self.create_time).strftime('%Y-%m-%d %H:%M:%S')}"
+        return f"{self.author.user.username} - {self.name} - {localtime(self.create_time).strftime('%Y-%m-%d %H:%M:%S')}"

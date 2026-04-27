@@ -1,5 +1,5 @@
 <script setup>
-import {ref, useTemplateRef, watch} from "vue";
+import {onBeforeUnmount, ref, useTemplateRef, watch} from "vue";
 import CameraIcon from "@/views/user/profile/components/icons/CameraIcon.vue";
 import Croppie from 'croppie'
 import 'croppie/croppie.css'
@@ -45,7 +45,6 @@ async function crop() {
   modalRef.value.close();
 }
 
-
 function onFileChange(e) {
   const file = e.target.files[0];
   e.target.value = "";
@@ -59,6 +58,9 @@ function onFileChange(e) {
   reader.readAsDataURL(file);
 }
 
+onBeforeUnmount(() => {
+  croppie?.destroy();
+})
 
 defineExpose({
   myBackgroundImage
@@ -66,7 +68,7 @@ defineExpose({
 </script>
 
 <template>
-  <fieldsetr class="fieldset">
+  <fieldset class="fieldset">
     <label class="label text-base">聊天背景</label>
     <div class="avatar relative">
       <div class="w-15 h-25 rounded-box" v-if="myBackgroundImage">
@@ -77,7 +79,7 @@ defineExpose({
         <CameraIcon @click="fileUploadRef.click()"/>
       </div>
     </div>
-  </fieldsetr>
+  </fieldset>
   <input type="file" accept="image/*" class="hidden" ref="file-upload-ref" @change="onFileChange">
 
     <dialog class="modal" ref="modal-ref">

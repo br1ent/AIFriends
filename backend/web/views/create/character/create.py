@@ -39,7 +39,7 @@ class CreateCharacterView(APIView):
                 })
 
             Character.objects.create(
-                autor=user_profile,
+                author=user_profile,
                 name=name,
                 profile=profile,
                 background_image=background_image,
