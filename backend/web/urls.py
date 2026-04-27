@@ -25,7 +25,7 @@ urlpatterns = [
     path("api/create/character/remove/", RemoveCharacterView.as_view(), name="remove_character"),
     path("api/create/character/update/", UpdateCharacterView.as_view(), name="update_character"),
     path("api/create/character/get_single/", GetSingleView.as_view(), name="get_single" ),
-    path("", index, name="index"),
 
+    path("", index, name="index"),
     re_path(r'^(?!media/|static/|assets/).*$', index)
 ]

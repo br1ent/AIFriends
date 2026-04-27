@@ -10,7 +10,7 @@ class RemoveCharacterView(APIView):
     def post(self, request):
         try:
             character_id = request.data["character_id"]
-            character = Character.objects.filter(id=character_id, author__user=request.user).delete()
+            Character.objects.filter(pk=character_id, author__user=request.user).delete()
 
             return Response({
                 "result": "success"
