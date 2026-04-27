@@ -62,6 +62,10 @@ function onFileChange(e) {
 onBeforeMount(() => {
   croppie?.destroy(); // ?是一个语法,如果?是null的话就返回null,不会执行后面的.destory()函数,否则就执行后面的函数
 })
+
+defineExpose({
+  myPhoto
+})
 </script>
 
 <template>

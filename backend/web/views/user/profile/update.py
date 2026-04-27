@@ -30,7 +30,7 @@ class UpdateProfileView(APIView):
                     "result": "个人简介不能为空!"
                 })
 
-            if username != user.username and User.objects.filter(username=username):
+            if username != user.username and User.objects.filter(username=username).exists():
                 return Response({
                     "result": "用户名已存在!"
                 })
@@ -42,8 +42,7 @@ class UpdateProfileView(APIView):
             user.username = username
             user.save()
             user_profile.profile = profile
-            user_profile.photo = photo
-            user_profile.updated_at = now()
+            user_profile.updated_time = now()
             user_profile.save()
 
             return Response({
