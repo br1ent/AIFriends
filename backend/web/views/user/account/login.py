@@ -7,7 +7,7 @@ from web.models.user import UserProfile
 
 
 class LoginView(APIView):
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         try:
             username = request.data.get("username").strip()
             password = request.data.get("password").strip()
