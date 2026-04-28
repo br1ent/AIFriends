@@ -54,7 +54,6 @@ async function update() {
       }
     }
   } catch (e) {
-    console.error(e);
   }
 }
 

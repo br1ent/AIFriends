@@ -23,7 +23,6 @@ async function logout() {
       await router.push({name: "user-account-login-index"});
     }
   } catch (err) {
-    console.error(err)
   }
 }
 

@@ -33,7 +33,6 @@ async function login() {
       }
     } catch(err) {
       errorMessage.value = "系统出错,请稍后再试!"
-      console.err(err)
     }
   }
 }

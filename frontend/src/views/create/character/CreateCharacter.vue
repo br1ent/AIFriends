@@ -67,7 +67,6 @@ async function create() {
         },1000)
       }
     } catch (err) {
-      console.error(err)
     }
   }
 }
